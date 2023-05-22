@@ -1,0 +1,16 @@
+<div>
+    <h2>Weight Input</h2>
+    <form (ngSubmit)="addData()">
+      <div class="form-group">
+        <label for="weight">Weight:</label>
+        <input type="number" id="weight" name="weight" [(ngModel)]="weightValue" required>
+      </div>
+      <div class="form-group">
+        <label for="datepicker">Date:</label>
+        <input type="text" class="form-control" id="datepicker" name="datepicker"
+               bsDatepicker [(ngModel)]="dateValue" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Add Data</button>
+    </form>
+  </div>
+  

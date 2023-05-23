@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { ChartConfiguration, ChartOptions, ChartType } from "chart.js";
+import { Component,OnInit } from '@angular/core';
+import { WeightdataService } from '../shared/weightdata.service';
+
 
 
 @Component({
@@ -7,20 +8,62 @@ import { ChartConfiguration, ChartOptions, ChartType } from "chart.js";
   templateUrl: './grafic.component.html',
   styleUrls: ['./grafic.component.css']
 })
-export class GraficComponent {
+export class GraficComponent implements OnInit {
+
+    weightData: any
+    dateData: any
+
+    constructor(private dataService: WeightdataService) {
+      this.weightData = 0;
+    }
+
+    ngOnInit(): void {
+      this.dataService.getWeights().subscribe(actualdata => {
+         actualdata.map(x => {
+         this.weightData = x.weight
+         this.dateData = x.date
+        })
+        this.updateChartData()
+        this.updateChartLabels()
+        console.log(this.dateData)
+      });
+
+    }
+
+
 
     // Chart.js options
     public chartOptions = {
       responsive: true
     };
+
+    public chartData = [
+      this.updateChartData()
+    ];
+    
   
     // Chart.js data
-    public chartData = [
-      { data: [80, 79, 78, 79, 78, 77, 76], label: 'Weight in kg' }
-    ];
+    updateChartData() {
+        let chartData = 
+          { 
+            data: this.weightData,
+            label: 'Weight in kg' 
+          }
+        return chartData
+    }
+
+    updateChartLabels() {
+      let chartLabel = []
+
+
+      
+    }
+
   
     // Chart.js labels
-    public chartLabels = ['22.05.2023', '23.05.2023', '25.05.2023', '28.05.2023', '30.05.2023', '31.05.2023', '01.06.2023'];
+    public chartLabels =
+     [
+     ];
     
     // Chart.js type
     public chartType = 'line';

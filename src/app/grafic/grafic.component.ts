@@ -26,6 +26,12 @@ export class GraficComponent implements OnInit,OnChanges {
           console.log(this.weightData,"weight")
           console.log(this.dateData,"date")
         })
+        this.chartData = [
+          {
+            data: this.weightData,
+            label: 'Weight in kg'
+          }
+        ];
       });
 
     }
@@ -43,7 +49,7 @@ export class GraficComponent implements OnInit,OnChanges {
 
     public chartData = [
       { 
-        data: this.weightData,
+        data: [] as any,
         label: 'Weight in kg' 
       }
 

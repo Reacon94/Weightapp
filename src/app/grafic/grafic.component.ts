@@ -1,4 +1,4 @@
-import { Component,OnInit } from '@angular/core';
+import { Component,OnChanges,OnInit, SimpleChanges } from '@angular/core';
 import { WeightdataService } from '../shared/weightdata.service';
 
 
@@ -8,29 +8,33 @@ import { WeightdataService } from '../shared/weightdata.service';
   templateUrl: './grafic.component.html',
   styleUrls: ['./grafic.component.css']
 })
-export class GraficComponent implements OnInit {
+export class GraficComponent implements OnInit,OnChanges {
 
-    weightData: any
-    dateData: any
+    weightData: any[] = []
+    dateData: any[] = []
 
     constructor(private dataService: WeightdataService) {
-      this.weightData = 0;
     }
 
     ngOnInit(): void {
-      this.dataService.getWeights().subscribe(actualdata => {
+      this.dataService.getWeights().pipe(
+       
+      ).subscribe(actualdata => {
          actualdata.map(x => {
-         this.weightData = x.weight
-         this.dateData = x.date
+          this.weightData.push(x.weight);
+          this.dateData.push(x.date);
+          console.log(this.weightData,"weight")
+          console.log(this.dateData,"date")
         })
-        this.updateChartData()
-        this.updateChartLabels()
-        console.log(this.dateData)
       });
 
     }
 
+    ngOnChanges(): void {
+  
+    }
 
+    
 
     // Chart.js options
     public chartOptions = {
@@ -38,32 +42,15 @@ export class GraficComponent implements OnInit {
     };
 
     public chartData = [
-      this.updateChartData()
+      { 
+        data: this.weightData,
+        label: 'Weight in kg' 
+      }
+
     ];
     
-  
-    // Chart.js data
-    updateChartData() {
-        let chartData = 
-          { 
-            data: this.weightData,
-            label: 'Weight in kg' 
-          }
-        return chartData
-    }
-
-    updateChartLabels() {
-      let chartLabel = []
-
-
-      
-    }
-
-  
     // Chart.js labels
-    public chartLabels =
-     [
-     ];
+    public chartLabels = [10,10,10,10];
     
     // Chart.js type
     public chartType = 'line';

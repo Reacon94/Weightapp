@@ -13,21 +13,19 @@ export class WeightInputComponent {
     
   }
 
-  weightValue: number = 0;
-  dateValue!: Date;
+  weightValue: number = 0
+  dateValue?: Date 
+
 
 
 
   addData() {
   const result = {
       weight: this.weightValue,
-      date: this.dateValue
+      date: this.dateValue?.toLocaleDateString()
     }
     this.dataService.addWeight(result)
     this.weightValue = 0
-    
-
   }
-
 
 }

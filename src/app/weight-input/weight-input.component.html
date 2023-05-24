@@ -8,7 +8,7 @@
       <div class="form-group">
         <label for="datepicker">Date:</label>
         <input type="text" class="form-control" id="datepicker" name="datepicker"
-               bsDatepicker [(ngModel)]="dateValue" required>
+               bsDatepicker  [(ngModel)]="dateValue" required [bsConfig]="{ isAnimated: true, dateInputFormat: 'YYYY-MM-DD'  }">
       </div>
       <button type="submit" class="btn btn-primary">Add Data</button>
     </form>

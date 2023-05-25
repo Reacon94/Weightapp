@@ -4,6 +4,7 @@
           [labels]="chartLabels"
           [options]="chartOptions"
           [type]="'line'"
+          (chartClick)="onChartClick($event)"
           >
           
   </canvas>

@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
-import { WeightdataService } from '../shared/weightdata.service';
+import { Component, OnInit } from '@angular/core';
+import { WeightdataService } from '../services/weightdata.service';
+import { AngularFireAuth } from "@angular/fire/compat/auth";
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AuthService } from '../services/auth.service';
 
 
 @Component({
@@ -7,31 +10,42 @@ import { WeightdataService } from '../shared/weightdata.service';
   templateUrl: './weight-input.component.html',
   styleUrls: ['./weight-input.component.css']
 })
-export class WeightInputComponent {
+export class WeightInputComponent implements OnInit {
   
-  constructor(private dataService: WeightdataService) {
-    
+  currentUserID?:any 
+  weightValue!: number 
+  dateValue?: Date 
+  sizeValue!: number 
+
+
+
+  constructor(
+    private dataService: WeightdataService,
+    private afS: AngularFirestore,
+    private afA: AngularFireAuth,
+    private authS: AuthService) 
+    {
+      this.currentUserID = localStorage.getItem("userID")
+      
+    }
+
+  ngOnInit(): void {
+  
   }
 
-  weightValue: number = 0
-  dateValue?: Date 
-  sizeValue: number = 0
 
 
-
-
-  addData() {
-  let bmi : number = this.weightValue / ( this.sizeValue ** 2)
-  
-
-
-  const result = {
+  addSub(){
+    let bmi : number = this.weightValue / ( this.sizeValue ** 2)
+    this.afS.collection("users").doc(this.currentUserID).collection("input").add({
       weight: this.weightValue,
       bmi: Math.ceil(bmi),
       date: this.dateValue?.toLocaleDateString()
-    }
-    this.dataService.addWeight(result)
+    }) 
+   
+
     this.weightValue = 0
   }
 
-}
+} 
+ 

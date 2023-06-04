@@ -51,7 +51,7 @@ export class AuthService implements OnInit {
         });
       }
 
-      localStorage.setItem('userID', this.result.user?.uid);
+      await localStorage.setItem('userID', this.result.user?.uid);
     } catch (error) {
       window.alert(error);
     }

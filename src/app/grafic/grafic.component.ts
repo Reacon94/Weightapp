@@ -54,6 +54,10 @@ export class GraficComponent implements OnInit {
      
     }
 
+    async setCurrentUserID(): Promise<void> {
+      
+    }
+
     public chartOptions = {
       responsive: true
     };

@@ -36,12 +36,20 @@ export class GraficComponent implements OnInit {
        
         
 
-        data.map((data:any) => {
-          this.weightData.push(data['weight'])
-          this.dateData.push(data['date'])
-          this.bmiData.push(data['bmi'])
-          this.inputId.push(data['id'])
-        })
+        data.map((data: any) => {
+          this.weightData.push(data['weight']);
+    
+          // Convert Firebase timestamp to a JavaScript Date object
+          const timestamp = data['date'];
+          const date = timestamp.toDate();
+    
+          // Format the date as a readable string
+          const formattedDate = date.toLocaleDateString(); // Adjust date format as needed
+    
+          this.dateData.push(formattedDate);
+          this.bmiData.push(data['bmi']);
+          this.inputId.push(data['id']);
+        });
 
         this.chartData = [
           {

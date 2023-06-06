@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { authguardGuard } from './authguard.guard';
 
 const routes: Routes = [
 {
@@ -11,7 +12,8 @@ const routes: Routes = [
 },
 {
   path:"dashboard",
-  component: DashboardComponent
+  component: DashboardComponent,
+  //canActivate:[authguardGuard]
 },
 {
   path: "**",
@@ -23,6 +25,6 @@ const routes: Routes = [
   
   @NgModule({
     imports: [RouterModule.forRoot(routes)],
-    exports: [RouterModule]
+    exports: [RouterModule] 
   })
   export class AppRoutingModule { }

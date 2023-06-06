@@ -40,7 +40,7 @@ export class WeightInputComponent implements OnInit {
     this.afS.collection("users").doc(this.currentUserID).collection("input").add({
       weight: this.weightValue,
       bmi: Math.ceil(bmi),
-      date: this.dateValue?.toLocaleDateString()
+      date: this.dateValue
     }) 
    
 

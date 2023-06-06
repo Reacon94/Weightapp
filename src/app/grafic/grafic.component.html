@@ -23,10 +23,8 @@
       <td>{{ item }}</td>
       <td>{{ dateData[i] }}</td>
       <td>{{ bmiData[i] }}</td>
-      <button (click)="this.dataService.deleteData(inputId[i])">
-        <svg xmlns="http://www.w3.org/2000/svg" height="15" viewBox="0 -960 960 960" width="15">
-          <path d="m249-207-42-42 231-231-231-231 42-42 231 231 231-231 42 42-231 231 231 231-42 42-231-231-231 231Z"/>
-        </svg>
+      <button type="button" (click)="this.dataService.deleteData(inputId[i])" class="btn btn-danger">
+       X
       </button>
     </tr>
   </tbody>

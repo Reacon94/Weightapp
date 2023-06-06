@@ -1,5 +1,5 @@
 export interface Idata {
     weight: number;
-    date?: string;
+    date?: Date;
     bmi: number
 }

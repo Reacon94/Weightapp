@@ -6,10 +6,6 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/comp
 import { IUser } from '../modal/iuser';
 
 
-
-
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -22,7 +18,6 @@ export class AuthService implements OnInit {
     private afA: AngularFireAuth,
     private router: Router,
     private afs: AngularFirestore
- 
   ) { 
     this.usersCollection = afs.collection("users") 
     
@@ -33,8 +28,11 @@ export class AuthService implements OnInit {
   }
 
   async logInWithGoogle() {
+  
     try {
+
       this.result = await this.afA.signInWithPopup(new auth.GoogleAuthProvider());
+      localStorage.setItem('userID', this.result.user?.uid);
       this.router.navigate(["dashboard"]);
       
       
@@ -51,7 +49,7 @@ export class AuthService implements OnInit {
         });
       }
 
-      await localStorage.setItem('userID', this.result.user?.uid);
+      
     } catch (error) {
       window.alert(error);
     }
